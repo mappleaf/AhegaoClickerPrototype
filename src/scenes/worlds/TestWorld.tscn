@@ -16,7 +16,6 @@ texture = ExtResource( 2 )
 
 [node name="botleft" type="Position2D" parent="."]
 position = Vector2( -960, 540 )
-scale = Vector2( 1, 1 )
 
 [node name="topright" type="Position2D" parent="."]
 position = Vector2( 768, 395.195 )
@@ -25,4 +24,3 @@ position = Vector2( 768, 395.195 )
 
 [node name="TestUnit" parent="UnitsHolder" instance=ExtResource( 1 )]
 position = Vector2( -144, 443.464 )
-scale = Vector2( 1, 1 )
