@@ -10,6 +10,10 @@ var testUnit = load("res://src/scenes/units/TestUnit.tscn")
 
 
 func _ready() -> void:
+	# TESTING!!
+	var unit = testUnit.instance()
+	units[unit] = unit.unit_data
+	
 	randomize()
 
 
