@@ -45,14 +45,17 @@ func interpolate(a, b, t):
 	return a + (b - a) * t
 
 func spawn_unit(unit) -> void:
-	unit._update_current_position(Vector2(clamp(rand_range(botleft.position.x, topright.position.x), unit.get_absolute_size().x / 2, topright.position.x - unit.get_absolute_size().x / 2), rand_range(botleft.position.y, topright.position.y)))
-	unit._update_target_position(Vector2(clamp(rand_range(botleft.position.x, topright.position.x), unit.get_absolute_size().x / 2, topright.position.x - unit.get_absolute_size().x / 2), rand_range(botleft.position.y, topright.position.y)))
+	unit._update_current_position(generate_point(unit.get_absolute_size()))
+	unit._update_target_position(generate_point(unit.get_absolute_size()))
+
+func generate_point(unit_size) -> Vector2:
+	return Vector2(clamp(rand_range(botleft.position.x, topright.position.x), unit_size.x / 2, topright.position.x - unit_size.x / 2), rand_range(botleft.position.y, topright.position.y))
 
 func append_units(unit) -> void:
 	Global.units[unit] = unit.unit_data
 	unit.position = unit.unit_data.pos
-	unit._update_target_position(Vector2(clamp(rand_range(botleft.position.x, topright.position.x), unit.get_absolute_size().x / 2, topright.position.x - unit.get_absolute_size().x / 2), rand_range(botleft.position.y, topright.position.y)))
+	unit._update_target_position(generate_point(unit.get_absolute_size()))
 
 func _send_new_target_position(unit) -> void:
-	unit._update_target_position(Vector2(clamp(rand_range(botleft.position.x, topright.position.x), unit.get_absolute_size().x / 2, topright.position.x - unit.get_absolute_size().x / 2), rand_range(botleft.position.y, topright.position.y)))
+	unit._update_target_position(generate_point(unit.get_absolute_size()))
 	Global._update_unit(unit)
