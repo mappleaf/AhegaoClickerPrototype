@@ -46,13 +46,11 @@ func interpolate(a, b, t):
 
 func spawn_unit(unit) -> void:
 	unit._update_current_position(Vector2(clamp(rand_range(botleft.position.x, topright.position.x), unit.get_absolute_size().x / 2, topright.position.x - unit.get_absolute_size().x / 2), rand_range(botleft.position.y, topright.position.y)))
-	var target_pos
 	unit._update_target_position(Vector2(clamp(rand_range(botleft.position.x, topright.position.x), unit.get_absolute_size().x / 2, topright.position.x - unit.get_absolute_size().x / 2), rand_range(botleft.position.y, topright.position.y)))
 
 func append_units(unit) -> void:
 	Global.units[unit] = unit.unit_data
 	unit.position = unit.unit_data.pos
-	var target_pos
 	unit._update_target_position(Vector2(clamp(rand_range(botleft.position.x, topright.position.x), unit.get_absolute_size().x / 2, topright.position.x - unit.get_absolute_size().x / 2), rand_range(botleft.position.y, topright.position.y)))
 
 func _send_new_target_position(unit) -> void:
