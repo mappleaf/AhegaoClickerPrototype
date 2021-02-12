@@ -4,7 +4,8 @@ extends Node2D
 export(float, 1, 1000) var perspective_factor = 1.5
 
 
-var units = []
+var units = {}
+var units_assign = {}
 
 
 onready var unitsHolder = $UnitsHolder
@@ -17,8 +18,21 @@ onready var top = Vector2(topright.position.x / 2, topright.position.y)
 
 
 func _ready() -> void:
-	for i in unitsHolder.get_child_count():
-		append_units(unitsHolder.get_children()[i])
+	Global.current_scene = "res://src/scenes/worlds/TestWorld.tscn"
+	
+	# JUST FOR TESTING!!!
+	#for i in unitsHolder.get_child_count():
+		
+		#unitsHolder.get_children()[i].unit_data.pos = unitsHolder.get_children()[i].position
+		#append_units(unitsHolder.get_children()[i])
+	var test_unit_instance = Global.testUnit.instance()
+	unitsHolder.add_child(test_unit_instance)
+	test_unit_instance.unit_data.position = Vector2(clamp(rand_range(botleft.position.x, topright.position.x), test_unit_instance.get_absolute_size().x / 2, topright.position.x - test_unit_instance.get_absolute_size().x / 2), rand_range(botleft.position.y, topright.position.y))
+	append_units(test_unit_instance)
+	
+	if Global.units:
+		for unit in Global.units.keys():
+			append_units(unit)
 
 func _physics_process(_delta) -> void:
 	if units:
@@ -34,9 +48,12 @@ func interpolate(a, b, t):
 	return a + (b - a) * t
 
 func append_units(unit) -> void:
-	units.append(unit)
+	Global.units[unit] = unit.unit_data
+	units[unit] = unit.unit_data
+	unit.position = unit.unit_data.pos
 	var target_pos
 	unit._update_target_position(Vector2(clamp(rand_range(botleft.position.x, topright.position.x), unit.get_absolute_size().x / 2, topright.position.x - unit.get_absolute_size().x / 2), rand_range(botleft.position.y, topright.position.y)))
 
-func _send_new_position(unit) -> void:
+func _send_new_target_position(unit) -> void:
 	unit._update_target_position(Vector2(clamp(rand_range(botleft.position.x, topright.position.x), unit.get_absolute_size().x / 2, topright.position.x - unit.get_absolute_size().x / 2), rand_range(botleft.position.y, topright.position.y)))
+	Global._update_unit(unit)

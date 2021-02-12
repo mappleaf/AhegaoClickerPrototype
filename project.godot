@@ -16,11 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="AhegaoClickerPrototype"
+run/main_scene="res://src/scenes/worlds/TestWorld.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Global="*res://src/scenes/Global.tscn"
+UI="*res://src/scenes/UI.tscn"
 
 [display]
 

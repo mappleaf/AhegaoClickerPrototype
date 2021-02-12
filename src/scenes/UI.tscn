@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/buttons/home-normal.png" type="Texture" id=1]
+[ext_resource path="res://assets/buttons/home-click.png" type="Texture" id=2]
+[ext_resource path="res://assets/buttons/home-hover.png" type="Texture" id=3]
+[ext_resource path="res://assets/buttons/home-locked.png" type="Texture" id=4]
+[ext_resource path="res://src/scripts/UI.gd" type="Script" id=5]
+[ext_resource path="res://assets/buttons/room-click.png" type="Texture" id=6]
+[ext_resource path="res://assets/buttons/room-hover.png" type="Texture" id=7]
+[ext_resource path="res://assets/buttons/room-locked.png" type="Texture" id=8]
+[ext_resource path="res://assets/buttons/room-normal.png" type="Texture" id=9]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource( 5 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -96.0
+margin_top = 8.0
+margin_right = 87.0
+margin_bottom = 199.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_constants/separation = 16
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HomeButton" type="TextureButton" parent="VBoxContainer"]
+margin_right = 183.0
+margin_bottom = 191.0
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+texture_disabled = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoomButton" type="TextureButton" parent="VBoxContainer"]
+margin_top = 207.0
+margin_right = 183.0
+margin_bottom = 398.0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 7 )
+texture_disabled = ExtResource( 8 )
+[connection signal="pressed" from="VBoxContainer/HomeButton" to="." method="_on_HomeButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/RoomButton" to="." method="_on_RoomButton_pressed"]
