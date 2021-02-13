@@ -53,6 +53,7 @@ func spawn_unit(unit) -> void:
 		unit._update_target_position(generate_point(unit.get_absolute_size()))
 	else:
 		unit._update_target_position(unit.unit_data.target_position)
+# warning-ignore:return_value_discarded
 	unit.connect("request_new_position", self, "_send_new_target_position", [unit])
 
 func generate_point(unit_size) -> Vector2:

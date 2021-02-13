@@ -33,10 +33,6 @@ onready var world = get_tree().get_nodes_in_group("world").front()
 signal request_new_position
 
 
-func _ready() -> void:
-# warning-ignore:return_value_discarded
-	connect("request_new_position", world, "_send_new_target_position", [self])
-
 func _physics_process(_delta):
 	if position.distance_to(unit_data.target_position) < 10 and !timer_called:
 		state = states.WAITING
