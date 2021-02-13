@@ -49,7 +49,10 @@ func spawn_unit(unit) -> void:
 		unit._update_current_position(generate_point(unit.get_absolute_size()))
 	else:
 		unit._update_current_position(unit.unit_data.pos)
-	unit._update_target_position(generate_point(unit.get_absolute_size()))
+	if unit.unit_data.target_position == Vector2.ZERO:
+		unit._update_target_position(generate_point(unit.get_absolute_size()))
+	else:
+		unit._update_target_position(unit.unit_data.target_position)
 
 func generate_point(unit_size) -> Vector2:
 	return Vector2(clamp(rand_range(botleft.position.x, topright.position.x), unit_size.x / 2, topright.position.x - unit_size.x / 2), rand_range(botleft.position.y, topright.position.y))
