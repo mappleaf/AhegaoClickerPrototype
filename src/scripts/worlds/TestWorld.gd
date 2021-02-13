@@ -45,7 +45,10 @@ func interpolate(a, b, t):
 	return a + (b - a) * t
 
 func spawn_unit(unit) -> void:
-	unit._update_current_position(generate_point(unit.get_absolute_size()))
+	if unit.unit_data.pos == Vector2.ZERO:
+		unit._update_current_position(generate_point(unit.get_absolute_size()))
+	else:
+		unit._update_current_position(unit.unit_data.pos)
 	unit._update_target_position(generate_point(unit.get_absolute_size()))
 
 func generate_point(unit_size) -> Vector2:

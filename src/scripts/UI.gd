@@ -17,6 +17,8 @@ func _process(_delta) -> void:
 
 func _on_HomeButton_pressed() -> void:
 	for unit in Global.units:
+		unit.unit_data.pos = unit.position
+		print(unit.unit_data.pos, unit.position)
 		get_tree().get_nodes_in_group("units_holder").front().remove_child(unit)
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://src/scenes/worlds/Main.tscn")
