@@ -47,7 +47,7 @@ func _physics_process(_delta):
 	elif state == states.MOVING:
 		velocity = position.direction_to(unit_data.target_position) * speed
 		move()
-	#print(position, " : ", target_pos, " : ", velocity)
+	#print(position, " : ", unit_data.target_position, " : ", velocity)
 	
 	#print(timer.time_left)
 

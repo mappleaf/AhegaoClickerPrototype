@@ -53,6 +53,7 @@ func spawn_unit(unit) -> void:
 		unit._update_target_position(generate_point(unit.get_absolute_size()))
 	else:
 		unit._update_target_position(unit.unit_data.target_position)
+	unit.connect("request_new_position", self, "_send_new_target_position", [unit])
 
 func generate_point(unit_size) -> Vector2:
 	return Vector2(clamp(rand_range(botleft.position.x, topright.position.x), unit_size.x / 2, topright.position.x - unit_size.x / 2), rand_range(botleft.position.y, topright.position.y))
