@@ -1,7 +1,7 @@
 extends Node2D
 
 
-export(float, 1, 1000) var perspective_factor = 1.5
+export(float, 1, 1000) var perspective_factor = 1.25
 
 
 onready var unitsHolder = $UnitsHolder

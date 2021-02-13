@@ -11,6 +11,9 @@ export(int) var speed = 128
 export(int) var acceleration = 500
 
 
+const MIN_DISTANCE = 15
+
+
 var velocity = Vector2.ZERO
 var state = states.WAITING
 
@@ -18,9 +21,6 @@ var unit_data = {
 	pos = position,
 	target_position = Vector2.ZERO
 }
-
-var reached_pos = false
-var timer_called = false
 
 
 onready var timer = $Timer
@@ -34,12 +34,11 @@ signal request_new_position
 
 
 func _physics_process(_delta):
-	if position.distance_to(unit_data.target_position) < 10 and !timer_called:
+	if position.distance_to(unit_data.target_position) < MIN_DISTANCE:
 		state = states.WAITING
-	if state != states.MOVING and !timer_called:
+	if state != states.MOVING and timer.time_left == 0:
 		velocity = Vector2.ZERO
 		timer.start(randi() % 5 + 1)
-		timer_called = true
 	elif state == states.MOVING:
 		velocity = position.direction_to(unit_data.target_position) * speed
 		move()
@@ -72,4 +71,3 @@ func _update_current_position(new_pos) -> void:
 func _on_Timer_timeout() -> void:
 	if randi() % 2 == 0:
 		emit_signal("request_new_position")
-	timer_called = false
