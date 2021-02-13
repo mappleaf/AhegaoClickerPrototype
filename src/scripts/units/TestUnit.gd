@@ -55,6 +55,7 @@ func _physics_process(_delta):
 func move() -> void:
 # warning-ignore:return_value_discarded
 	move_and_slide(velocity)
+	unit_data.pos = position
 
 func sync_scale(new_scale) -> void:
 	scale = new_scale
