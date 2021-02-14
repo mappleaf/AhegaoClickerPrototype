@@ -30,9 +30,10 @@ func _process(_delta) -> void:
 
 
 func remove_units_in_room() -> void:
-	for unit in Global.units:
-		unit.unit_data.pos = unit.position
-		get_tree().get_nodes_in_group("units_holder").front().remove_child(unit)
+	if Global.units:
+		for unit in Global.units:
+			unit.unit_data.pos = unit.position
+			get_tree().get_nodes_in_group("units_holder").front().remove_child(unit)
 
 
 func _on_HomeButton_pressed() -> void:
