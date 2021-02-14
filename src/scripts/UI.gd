@@ -1,16 +1,21 @@
 extends CanvasLayer
 
 
-onready var homeButton = $VBoxContainer/HomeButton
-onready var roomButton = $VBoxContainer/RoomButton
+onready var homeButton = $Container/VBoxContainer/HomeButton
+onready var roomButton = $Container/VBoxContainer/RoomButton
+onready var container = $Container
 
 
 func _process(_delta) -> void:
 	match Global.current_scene:
+		"res://src/scenes/worlds/Menu.tscn":
+			container.hide()
 		"res://src/scenes/worlds/Main.tscn":
+			container.show()
 			homeButton.disabled = true
 			roomButton.disabled = false
 		"res://src/scenes/worlds/TestWorld.tscn":
+			container.show()
 			homeButton.disabled = false
 			roomButton.disabled = true
 
