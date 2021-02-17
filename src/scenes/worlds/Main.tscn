@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/scripts/worlds/Main.gd" type="Script" id=1]
 [ext_resource path="res://assets/test/56ba3914e1fc1152c76ef9be.png" type="Texture" id=2]
+[ext_resource path="res://src/resources/font1.tres" type="DynamicFont" id=3]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 3 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -10,27 +14,40 @@ script = ExtResource( 1 )
 margin_right = 2560.0
 margin_bottom = 1440.0
 rect_scale = Vector2( 0.5, 0.5 )
+theme = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
 margin_left = 1030.0
-margin_top = 439.0
+margin_top = 405.0
 margin_right = 1530.0
-margin_bottom = 1001.0
+margin_bottom = 1035.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
 margin_right = 500.0
-margin_bottom = 562.0
+margin_bottom = 630.0
 
 [node name="Clicker" type="TextureButton" parent="CenterContainer/HBoxContainer/VBoxContainer"]
 margin_right = 500.0
 margin_bottom = 562.0
 texture_normal = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="CenterContainer/HBoxContainer/VBoxContainer/Clicker"]
+wait_time = 0.35
+autostart = true
+
+[node name="ComboLabel" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+margin_top = 566.0
+margin_right = 500.0
+margin_bottom = 630.0
+text = "Combo: 0"
+align = 1
 [connection signal="button_down" from="CenterContainer/HBoxContainer/VBoxContainer/Clicker" to="." method="_on_TextureButton_button_down"]
 [connection signal="button_up" from="CenterContainer/HBoxContainer/VBoxContainer/Clicker" to="." method="_on_TextureButton_button_up"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/Clicker" to="." method="_on_Clicker_pressed"]
+[connection signal="timeout" from="CenterContainer/HBoxContainer/VBoxContainer/Clicker/Timer" to="." method="_on_ClickerTimer_timeout"]
