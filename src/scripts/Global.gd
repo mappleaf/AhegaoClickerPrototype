@@ -25,7 +25,6 @@ func _ready() -> void:
 		units_in_room[unit] = load(owned_units[unit]).instance()
 		i += 1
 	#units_in_room[test_unit] = test_unit.unit_data
-	print(units_in_room)
 
 
 func _append_unit(path: String) -> void:

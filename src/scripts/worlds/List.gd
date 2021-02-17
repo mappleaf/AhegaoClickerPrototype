@@ -12,4 +12,5 @@ func _on_TextureButton_pressed():
 	if Global.owned_units.keys().has(unit_type):
 		if !Global.units_in_room.keys().has(unit_type):
 			Global._append_unit(unit_type)
-			print(Global.units_in_room)
+		else:
+			pass

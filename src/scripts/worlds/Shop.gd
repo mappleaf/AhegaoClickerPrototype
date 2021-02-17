@@ -12,5 +12,4 @@ func _on_TextureButton_pressed():
 	if !Global.owned_units.keys().has(unit_type):
 		Global.owned_units[unit_type] = Global.unit_types[unit_type]
 	else:
-		print("hello")
-		print(Global.owned_units)
+		pass
