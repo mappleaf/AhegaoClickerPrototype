@@ -18,6 +18,7 @@ var velocity = Vector2.ZERO
 var state = states.WAITING
 
 var unit_data = {
+	type = Global.unit_types.TEST,
 	pos = position,
 	target_position = Vector2.ZERO
 }
@@ -42,6 +43,8 @@ func _physics_process(_delta):
 	elif state == states.MOVING:
 		velocity = position.direction_to(unit_data.target_position) * speed
 		move()
+	
+	unit_data.pos = position
 	#print(position, " : ", unit_data.target_position, " : ", velocity)
 	
 	#print(timer.time_left)
@@ -62,7 +65,6 @@ func get_absolute_size() -> Vector2:
 func _update_target_position(new_pos) -> void:
 	unit_data.target_position = new_pos
 	state = states.MOVING
-	Global._update_unit(self)
 
 func _update_current_position(new_pos) -> void:
 	position = new_pos

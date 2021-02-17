@@ -26,17 +26,17 @@ func _ready() -> void:
 	#test_unit_instance.unit_data.position = Vector2(clamp(rand_range(botleft.position.x, topright.position.x), test_unit_instance.get_absolute_size().x / 2, topright.position.x - test_unit_instance.get_absolute_size().x / 2), rand_range(botleft.position.y, topright.position.y))
 	#append_units(test_unit_instance)
 	
-	if Global.units:
-		for unit in Global.units.keys():
-			unitsHolder.add_child(unit)
-			spawn_unit(unit)
+	if Global.units_in_room:
+		for unit in Global.units_in_room:
+			unitsHolder.add_child(Global.units_in_room[unit])
+			spawn_unit(Global.units_in_room[unit])
 
 func _physics_process(_delta) -> void:
-	if Global.units:
-		for unit in Global.units:
-			var ratio = (unit.position.y - botleft.position.y) / (topright.position.y - botleft.position.y)
+	if Global.units_in_room:
+		for unit in Global.units_in_room:
+			var ratio = (Global.units_in_room[unit].position.y - botleft.position.y) / (topright.position.y - botleft.position.y)
 			var new_scale = interpolate(perspective_factor, 1.0, ratio)
-			unit.sync_scale(Vector2(new_scale, new_scale))
+			Global.units_in_room[unit].sync_scale(Vector2(new_scale, new_scale))
 			#unit.sync_scale(unit.position.distance_to((Vector2(unit.position.x, bot.y)) / perspective_factor) + 1)
 			#print(unit.position.distance_to((Vector2(unit.position.x, bot.y)) / perspective_factor) + 1)
 
@@ -59,11 +59,10 @@ func spawn_unit(unit) -> void:
 func generate_point(unit_size) -> Vector2:
 	return Vector2(clamp(rand_range(botleft.position.x, topright.position.x), unit_size.x / 2, topright.position.x - unit_size.x / 2), rand_range(botleft.position.y, topright.position.y))
 
-func append_units(unit) -> void:
-	Global.units[unit] = unit.unit_data
-	unit.position = unit.unit_data.pos
-	unit._update_target_position(generate_point(unit.get_absolute_size()))
+#func append_units(unit) -> void:
+#	Global.units_in_room[unit] = unit.unit_data
+#	unit.position = unit.unit_data.pos
+#	unit._update_target_position(generate_point(unit.get_absolute_size()))
 
 func _send_new_target_position(unit) -> void:
 	unit._update_target_position(generate_point(unit.get_absolute_size()))
-	Global._update_unit(unit)
