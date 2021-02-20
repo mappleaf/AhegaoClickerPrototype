@@ -1,11 +1,20 @@
 extends Node2D
 
 
+const MIN_FREQ = 20
+const MAX_FREQ = 20000
+
+
 onready var clicker = $CenterContainer/HBoxContainer/VBoxContainer/Clicker
 onready var container = $CenterContainer
 onready var clickerTimer = $CenterContainer/HBoxContainer/VBoxContainer/Clicker/Timer
 
 onready var comboLabel = $CenterContainer/HBoxContainer/VBoxContainer/ComboLabel
+
+onready var heart_forbeat = $Heart
+onready var heartbeat = $Heartbeat
+onready var heartbeatTimer = $HeartbeatTimer
+
 
 var heart = preload("res://src/scenes/Heart.tscn")
 var combo = 0
@@ -13,6 +22,11 @@ var combo = 0
 
 func _ready() -> void:
 	Global.current_scene = "res://src/scenes/worlds/Main.tscn"
+
+func _process(_delta) -> void:
+	heart_forbeat.scale.x = lerp(heart_forbeat.scale.x, 0.25, 0.05)
+	heart_forbeat.scale.y = lerp(heart_forbeat.scale.y, 0.25, 0.05)
+	print(heartbeatTimer.time_left)
 
 func _physics_process(_delta) -> void:
 	combo = clamp(combo, 0, 100)
@@ -33,3 +47,14 @@ func _on_Clicker_pressed():
 
 func _on_ClickerTimer_timeout():
 	combo -= 1
+
+func _on_HeartbeatTimer_timeout():
+	heartbeat.play()
+	if combo == 0:
+		heartbeatTimer.start(1.25)
+	elif combo / 10 < 0.1:
+		heartbeatTimer.start(1.25)
+	else:
+		heartbeatTimer.start(1.5 / (combo / 10.0))
+	heart_forbeat.scale.x = 0.5
+	heart_forbeat.scale.y = 0.5

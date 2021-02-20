@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/scripts/worlds/Main.gd" type="Script" id=1]
 [ext_resource path="res://assets/test/56ba3914e1fc1152c76ef9be.png" type="Texture" id=2]
 [ext_resource path="res://src/resources/font1.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/test/heart_forbeat.png" type="Texture" id=4]
+[ext_resource path="res://assets/sfx/heartbeat.wav" type="AudioStream" id=5]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 3 )
@@ -47,7 +49,22 @@ margin_right = 500.0
 margin_bottom = 630.0
 text = "Combo: 0"
 align = 1
+
+[node name="Heart" type="Sprite" parent="."]
+position = Vector2( 832, 384 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="Heartbeat" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -12.0
+bus = "HeartbeatBus"
+
+[node name="HeartbeatTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
 [connection signal="button_down" from="CenterContainer/HBoxContainer/VBoxContainer/Clicker" to="." method="_on_TextureButton_button_down"]
 [connection signal="button_up" from="CenterContainer/HBoxContainer/VBoxContainer/Clicker" to="." method="_on_TextureButton_button_up"]
 [connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/Clicker" to="." method="_on_Clicker_pressed"]
 [connection signal="timeout" from="CenterContainer/HBoxContainer/VBoxContainer/Clicker/Timer" to="." method="_on_ClickerTimer_timeout"]
+[connection signal="timeout" from="HeartbeatTimer" to="." method="_on_HeartbeatTimer_timeout"]
