@@ -13,3 +13,7 @@ func _on_TextureButton_pressed():
 		Global.owned_units[unit_type] = Global.unit_types[unit_type]
 	else:
 		pass
+
+
+func _on_GachaShopButton_pressed():
+	get_tree().change_scene("res://src/scenes/worlds/GachaShop.tscn")

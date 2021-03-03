@@ -2,7 +2,8 @@ extends Node
 
 
 var unit_types = {
-	TEST = "res://src/scenes/units/TestUnit.tscn"
+	TEST = "res://src/scenes/units/TestUnit.tscn",
+	TEST2 = "res://src/scenes/units/TestUnit2.tscn"
 }
 
 

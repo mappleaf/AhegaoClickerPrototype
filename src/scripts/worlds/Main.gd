@@ -26,7 +26,6 @@ func _ready() -> void:
 func _process(_delta) -> void:
 	heart_forbeat.scale.x = lerp(heart_forbeat.scale.x, 0.25, 0.05)
 	heart_forbeat.scale.y = lerp(heart_forbeat.scale.y, 0.25, 0.05)
-	print(heartbeatTimer.time_left)
 
 func _physics_process(_delta) -> void:
 	combo = clamp(combo, 0, 100)
