@@ -1,10 +1,11 @@
 extends Node
 
 
-var unit_types = {
-	TEST = "res://src/scenes/units/TestUnit.tscn",
-	TEST2 = "res://src/scenes/units/TestUnit2.tscn"
-}
+#var unit_types = {
+#	TEST = "res://src/scenes/units/TestUnit.tscn",
+#	TEST2 = "res://src/scenes/units/TestUnit2.tscn"
+#}
+var unit_types = {}
 
 
 var current_scene
@@ -15,6 +16,7 @@ var owned_units = {}
 func _ready() -> void:
 	randomize()
 	
+	Server.get_unit_types()
 	# TESTING!!
 #	for unit in unit_types.keys():
 #		owned_units[unit] = unit_types[unit]
@@ -30,3 +32,6 @@ func _ready() -> void:
 
 func _append_unit(path: String) -> void:
 	units_in_room[path] = load(owned_units[path]).instance()
+
+remote func _return_units_list(list) -> void:
+	unit_types = list

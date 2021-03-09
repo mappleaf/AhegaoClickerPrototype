@@ -13,6 +13,10 @@ func _process(_delta) -> void:
 	match Global.current_scene:
 		"res://src/scenes/worlds/Menu.tscn":
 			container.hide()
+		"res://src/scenes/worlds/NoConnection.tscn":
+			container.hide()
+		"res://src/scenes/worlds/Connecting.tscn":
+			container.hide()
 		"res://src/scenes/worlds/Main.tscn":
 			container.show()
 			homeButton.disabled = true
