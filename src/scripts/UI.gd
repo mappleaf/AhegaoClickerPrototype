@@ -17,6 +17,8 @@ func _process(_delta) -> void:
 			container.hide()
 		"res://src/scenes/worlds/Connecting.tscn":
 			container.hide()
+		"res://src/scenes/worlds/LoginScreen.tscn":
+			container.hide()
 		"res://src/scenes/worlds/Main.tscn":
 			container.show()
 			homeButton.disabled = true

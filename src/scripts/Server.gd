@@ -6,7 +6,8 @@ var port = 1909
 
 
 func _ready() -> void:
-	ConnectToServer()
+	#ConnectToServer()
+	pass
 
 
 func ConnectToServer() -> void:
@@ -24,7 +25,7 @@ func get_unit_types() -> void:
 func _on_connection_failed() -> void:
 	print("Failed to connect")
 # warning-ignore:return_value_discarded
-	get_tree().change_scene("res://src/scenes/worlds/NoConnection.tscn")
+	get_tree().change_scene("res://src/scenes/worlds/LoginScreen.tscn")
 
 func _on_connection_succeeded() -> void:
 	print("Succesfully connected")
@@ -34,4 +35,3 @@ func _on_connection_succeeded() -> void:
 
 remote func _return_units_list(list) -> void:
 	Global.unit_types = list
-	print(Global.unit_types)
