@@ -28,4 +28,10 @@ func _on_connection_failed() -> void:
 
 func _on_connection_succeeded() -> void:
 	print("Succesfully connected")
+	get_unit_types()
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://src/scenes/worlds/Menu.tscn")
+
+remote func _return_units_list(list) -> void:
+	Global.unit_types = list
+	print(Global.unit_types)

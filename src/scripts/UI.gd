@@ -50,7 +50,8 @@ func remove_units_in_room() -> void:
 
 
 func _on_HomeButton_pressed() -> void:
-	remove_units_in_room()
+	if get_tree().current_scene.get_path() == "res://src/scenes/worlds/TestWorld.tscn" and get_tree().get_nodes_in_group("units_holder").front().get_child_count() != 0:
+		remove_units_in_room()
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://src/scenes/worlds/Main.tscn")
 
@@ -59,11 +60,13 @@ func _on_RoomButton_pressed() -> void:
 	get_tree().change_scene("res://src/scenes/worlds/TestWorld.tscn")
 
 func _on_ShopButton_pressed():
-	remove_units_in_room()
+	if get_tree().current_scene.get_path() == "res://src/scenes/worlds/TestWorld.tscn" and get_tree().get_nodes_in_group("units_holder").front().get_child_count() != 0:
+		remove_units_in_room()
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://src/scenes/worlds/Shop.tscn")
 
 func _on_ListButton_pressed():
-	remove_units_in_room()
+	if get_tree().current_scene.get_path() == "res://src/scenes/worlds/TestWorld.tscn" and get_tree().get_nodes_in_group("units_holder").front().get_child_count() != 0:
+		remove_units_in_room()
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://src/scenes/worlds/List.tscn")
