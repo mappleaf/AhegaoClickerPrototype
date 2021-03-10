@@ -20,13 +20,25 @@ func _ready() -> void:
 #	for unit in unit_types.keys():
 #		owned_units[unit] = unit_types[unit]
 	
+	append_units()
+	#units_in_room[test_unit] = test_unit.unit_data
+
+
+func get_owned_units() -> void:
+	Server.request_owned_units()
+
+func get_units_in_room() -> void:
+	Server.get_units_in_room()
+
+
+
+func append_units() -> void:
 	var i = 0
 	for unit in owned_units:
 		if i > 7:
 			break
 		units_in_room[unit] = load(owned_units[unit]).instance()
 		i += 1
-	#units_in_room[test_unit] = test_unit.unit_data
 
 
 func _append_unit(path: String) -> void:

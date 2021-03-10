@@ -21,6 +21,15 @@ func ConnectToServer() -> void:
 func get_unit_types() -> void:
 	rpc_id(1, "send_units_list")
 
+func request_owned_units() -> void:
+	rpc_id(1, "send_owned_units")
+
+func get_units_in_room() -> void:
+	rpc_id(1, "send_units_in_room")
+
+func send_units_in_room() -> void:
+	rpc_id(1, "get_units_in_room", Global.units_in_room)
+
 
 func _on_connection_failed() -> void:
 	print("Failed to connect")
@@ -35,3 +44,12 @@ func _on_connection_succeeded() -> void:
 
 remote func _return_units_list(list) -> void:
 	Global.unit_types = list
+
+remote func _return_owned_units(units) -> void:
+	Global.owned_units = units
+	Global.append_units()
+
+remote func _return_units_in_room(list) -> void:
+	for item in list:
+		if !Global.units_in_room.has(item):
+			Global._append_unit(item)
