@@ -30,6 +30,9 @@ func get_units_in_room() -> void:
 func send_units_in_room() -> void:
 	rpc_id(1, "get_units_in_room", Global.units_in_room)
 
+func request_new_random_unit() -> void:
+	rpc_id(1, "add_random_unit")
+
 
 func _on_connection_failed() -> void:
 	print("Failed to connect")
@@ -47,7 +50,6 @@ remote func _return_units_list(list) -> void:
 
 remote func _return_owned_units(units) -> void:
 	Global.owned_units = units
-	Global.append_units()
 
 remote func _return_units_in_room(list) -> void:
 	for item in list:
