@@ -14,7 +14,7 @@ func ConnectToServer() -> void:
 	network.create_client(ip, port)
 	get_tree().set_network_peer(network)
 	
-	network.connect("server_disconnected", self, "_on_connection_failed")
+	network.connect("server_disconnected", self, "_on_server_disconnected")
 	network.connect("connection_failed", self, "_on_connection_failed")
 	network.connect("connection_succeeded", self, "_on_connection_succeeded")
 
@@ -33,6 +33,10 @@ func send_units_in_room() -> void:
 func request_new_random_unit() -> void:
 	rpc_id(1, "add_random_unit")
 
+
+func _on_server_disconnected() -> void:
+	print("Server is shut down")
+	get_tree().change_scene("res://src/scenes/worlds/NoConnection.tscn")
 
 func _on_connection_failed() -> void:
 	print("Failed to connect")
