@@ -40,12 +40,11 @@ func RequestLogin() -> void:
 	username = ""
 	password = ""
 
-remote func ReturnLoginRequest(result) -> void:
+remote func ReturnLoginRequest(result, token) -> void:
 	print("Result received")
 	if result == true:
+		Server.token = token
 		Server.ConnectToServer()
-# warning-ignore:return_value_discarded
-		get_tree().change_scene("res://src/scenes/worlds/Connecting.tscn")
 	else:
 		print("Please provide correct username and password")
 		get_tree().get_nodes_in_group("login_button").front().disabled = false

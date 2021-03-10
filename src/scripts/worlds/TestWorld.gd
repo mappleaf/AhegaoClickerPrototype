@@ -26,6 +26,7 @@ func _ready() -> void:
 	#test_unit_instance.unit_data.position = Vector2(clamp(rand_range(botleft.position.x, topright.position.x), test_unit_instance.get_absolute_size().x / 2, topright.position.x - test_unit_instance.get_absolute_size().x / 2), rand_range(botleft.position.y, topright.position.y))
 	#append_units(test_unit_instance)
 	
+	Global.get_units_in_room()
 	if Global.units_in_room:
 		for unit in Global.units_in_room:
 			unitsHolder.add_child(Global.units_in_room[unit])
