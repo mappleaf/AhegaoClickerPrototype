@@ -73,6 +73,7 @@ text = "Пароль"
 margin_top = 506.0
 margin_right = 856.0
 margin_bottom = 580.0
+secret = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/HBoxContainer/VBoxContainer"]
 margin_top = 628.0
