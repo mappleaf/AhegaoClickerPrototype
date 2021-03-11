@@ -29,15 +29,15 @@ func _ready() -> void:
 	Global.get_units_in_room()
 	if Global.units_in_room:
 		for unit in Global.units_in_room:
-			unitsHolder.add_child(Global.units_in_room[unit])
+			#unitsHolder.add_child(Global.units_in_room[unit])
 			spawn_unit(Global.units_in_room[unit])
 
 func _physics_process(_delta) -> void:
 	if Global.units_in_room:
-		for unit in Global.units_in_room:
-			var ratio = (Global.units_in_room[unit].position.y - botleft.position.y) / (topright.position.y - botleft.position.y)
+		for unit in unitsHolder.get_children():
+			var ratio = (unit.position.y - botleft.position.y) / (topright.position.y - botleft.position.y)
 			var new_scale = interpolate(perspective_factor, 1.0, ratio)
-			Global.units_in_room[unit].sync_scale(Vector2(new_scale, new_scale))
+			unit.sync_scale(Vector2(new_scale, new_scale))
 			#unit.sync_scale(unit.position.distance_to((Vector2(unit.position.x, bot.y)) / perspective_factor) + 1)
 			#print(unit.position.distance_to((Vector2(unit.position.x, bot.y)) / perspective_factor) + 1)
 
@@ -45,7 +45,10 @@ func _physics_process(_delta) -> void:
 func interpolate(a, b, t):
 	return a + (b - a) * t
 
-func spawn_unit(unit) -> void:
+func spawn_unit(path) -> void:
+	var unit = load(path).instance()
+	unitsHolder.add_child(unit)
+	
 	if unit.unit_data.pos == Vector2.ZERO:
 		unit._update_current_position(generate_point(unit.get_absolute_size()))
 	else:

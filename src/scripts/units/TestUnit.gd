@@ -19,7 +19,7 @@ var state = states.WAITING
 
 var unit_data = {
 	type = Global.unit_types.TEST,
-	pos = position,
+	pos = global_position,
 	target_position = Vector2.ZERO
 }
 

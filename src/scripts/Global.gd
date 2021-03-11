@@ -37,9 +37,9 @@ func append_units() -> void:
 	for unit in owned_units:
 		if i > 7:
 			break
-		units_in_room[unit] = load(owned_units[unit]).instance()
+		units_in_room[unit] = owned_units[unit]
 		i += 1
 
 
 func _append_unit(path: String) -> void:
-	units_in_room[path] = load(owned_units[path]).instance()
+	units_in_room[path] = owned_units[path]
