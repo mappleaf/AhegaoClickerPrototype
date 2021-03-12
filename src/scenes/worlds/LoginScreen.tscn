@@ -24,18 +24,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+[node name="Login" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 852.0
 margin_top = 311.0
 margin_right = 1708.0
 margin_bottom = 1129.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
-margin_right = 856.0
-margin_bottom = 818.0
 custom_constants/separation = 48
 
-[node name="Title" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="CenterContainer/Login"]
 margin_right = 856.0
 margin_bottom = 64.0
 text = "Авторизация"
@@ -43,44 +39,46 @@ align = 1
 valign = 1
 uppercase = true
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Login"]
 margin_top = 112.0
 margin_right = 856.0
 margin_bottom = 112.0
 
-[node name="UsernameTitle" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="UsernameTitle" type="Label" parent="CenterContainer/Login"]
 margin_top = 160.0
 margin_right = 856.0
 margin_bottom = 224.0
 rect_min_size = Vector2( 1, 1 )
 text = "Логин"
 
-[node name="Username" type="LineEdit" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="LogUsername" type="LineEdit" parent="CenterContainer/Login"]
 margin_top = 272.0
 margin_right = 856.0
 margin_bottom = 346.0
+max_length = 16
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PasswordTitle" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="PasswordTitle" type="Label" parent="CenterContainer/Login"]
 margin_top = 394.0
 margin_right = 856.0
 margin_bottom = 458.0
 text = "Пароль"
 
-[node name="Password" type="LineEdit" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="LogPassword" type="LineEdit" parent="CenterContainer/Login"]
 margin_top = 506.0
 margin_right = 856.0
 margin_bottom = 580.0
+max_length = 22
 secret = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Login"]
 margin_top = 628.0
 margin_right = 856.0
 margin_bottom = 818.0
 
-[node name="LoginButton" type="TextureButton" parent="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer" groups=[
+[node name="LoginButton" type="TextureButton" parent="CenterContainer/Login/HBoxContainer" groups=[
 "login_button",
 ]]
 margin_right = 426.0
@@ -90,7 +88,7 @@ texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 3 )
 texture_disabled = ExtResource( 2 )
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer/LoginButton"]
+[node name="Label" type="Label" parent="CenterContainer/Login/HBoxContainer/LoginButton"]
 margin_right = 424.0
 margin_bottom = 181.0
 text = "Логин"
@@ -100,7 +98,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RegisterButton" type="TextureButton" parent="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="RegisterButton" type="TextureButton" parent="CenterContainer/Login/HBoxContainer" groups=[
+"register_button",
+]]
 margin_left = 430.0
 margin_right = 856.0
 margin_bottom = 190.0
@@ -109,7 +109,7 @@ texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 3 )
 texture_disabled = ExtResource( 2 )
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer/RegisterButton"]
+[node name="Label" type="Label" parent="CenterContainer/Login/HBoxContainer/RegisterButton"]
 margin_right = 430.0
 margin_bottom = 181.0
 text = "Регистрация"
@@ -118,5 +118,108 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer/LoginButton" to="." method="_on_LoginButton_pressed"]
-[connection signal="pressed" from="CenterContainer/HBoxContainer/VBoxContainer/HBoxContainer/RegisterButton" to="." method="_on_RegisterButton_pressed"]
+
+[node name="Register" type="VBoxContainer" parent="CenterContainer"]
+visible = false
+margin_left = 852.0
+margin_top = 194.0
+margin_right = 1708.0
+margin_bottom = 1246.0
+custom_constants/separation = 48
+
+[node name="Title" type="Label" parent="CenterContainer/Register"]
+margin_right = 856.0
+margin_bottom = 64.0
+text = "Создание аккаунта"
+uppercase = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Register"]
+margin_top = 112.0
+margin_right = 856.0
+margin_bottom = 112.0
+
+[node name="UsernameTitle" type="Label" parent="CenterContainer/Register"]
+margin_top = 160.0
+margin_right = 856.0
+margin_bottom = 224.0
+text = "Логин"
+
+[node name="RegUsername" type="LineEdit" parent="CenterContainer/Register"]
+margin_top = 272.0
+margin_right = 856.0
+margin_bottom = 346.0
+max_length = 16
+
+[node name="Password1Title" type="Label" parent="CenterContainer/Register"]
+margin_top = 394.0
+margin_right = 856.0
+margin_bottom = 458.0
+text = "Пароль"
+
+[node name="RegPassword1" type="LineEdit" parent="CenterContainer/Register"]
+margin_top = 506.0
+margin_right = 856.0
+margin_bottom = 580.0
+max_length = 22
+
+[node name="Password2Title" type="Label" parent="CenterContainer/Register"]
+margin_top = 628.0
+margin_right = 856.0
+margin_bottom = 692.0
+text = "Подтверждение пароля"
+
+[node name="RegPassword2" type="LineEdit" parent="CenterContainer/Register"]
+margin_top = 740.0
+margin_right = 856.0
+margin_bottom = 814.0
+max_length = 22
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Register"]
+margin_top = 862.0
+margin_right = 856.0
+margin_bottom = 1052.0
+
+[node name="ConfirmButton" type="TextureButton" parent="CenterContainer/Register/HBoxContainer" groups=[
+"confirm_button",
+]]
+margin_right = 426.0
+margin_bottom = 190.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 3 )
+texture_disabled = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="CenterContainer/Register/HBoxContainer/ConfirmButton"]
+margin_right = 418.0
+margin_bottom = 176.0
+text = "Подтвердить"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="TextureButton" parent="CenterContainer/Register/HBoxContainer" groups=[
+"back_button",
+]]
+margin_left = 430.0
+margin_right = 856.0
+margin_bottom = 190.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 3 )
+texture_disabled = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="CenterContainer/Register/HBoxContainer/BackButton"]
+margin_right = 430.0
+margin_bottom = 176.0
+text = "Назад"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="CenterContainer/Login/HBoxContainer/LoginButton" to="." method="_on_LoginButton_pressed"]
+[connection signal="pressed" from="CenterContainer/Login/HBoxContainer/RegisterButton" to="." method="_on_RegisterButton_pressed"]
+[connection signal="pressed" from="CenterContainer/Register/HBoxContainer/ConfirmButton" to="." method="_on_ConfirmButton_pressed"]
+[connection signal="pressed" from="CenterContainer/Register/HBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]

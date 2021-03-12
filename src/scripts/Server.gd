@@ -21,16 +21,19 @@ func ConnectToServer() -> void:
 	network.connect("connection_succeeded", self, "_on_connection_succeeded")
 
 remote func FetchToken():
-	rpc_id(1, "ReturnToken", token)
+	if get_tree().get_rpc_sender_id() == 1:
+		rpc_id(1, "ReturnToken", token)
 
 remote func ReturnTokenVerificationResults(result) -> void:
-	if result == true:
-		print("Succesful token verification")
-		# warning-ignore:return_value_discarded
-		#get_tree().change_scene("res://src/scenes/worlds/Connecting.tscn")
-	else:
-		print("Login failed, please try again")
-		get_tree().get_nodes_in_group("login_button").front().disabled = false
+	if get_tree().get_rpc_sender_id() == 1:
+		if result == true:
+			print("Succesful token verification")
+			# warning-ignore:return_value_discarded
+			#get_tree().change_scene("res://src/scenes/worlds/Connecting.tscn")
+		else:
+			print("Login failed, please try again")
+			get_tree().get_nodes_in_group("login_button").front().disabled = false
+			get_tree().get_nodes_in_group("register_button").front().disabled = false
 
 func get_unit_types() -> void:
 	rpc_id(1, "send_units_list")
@@ -65,13 +68,16 @@ func _on_connection_succeeded() -> void:
 	get_tree().change_scene("res://src/scenes/worlds/Menu.tscn")
 
 remote func _return_units_list(list) -> void:
-	Global.unit_types = list
+	if get_tree().get_rpc_sender_id() == 1:
+		Global.unit_types = list
 
 remote func _return_owned_units(units) -> void:
-	Global.owned_units = units
+	if get_tree().get_rpc_sender_id() == 1:
+		Global.owned_units = units
 
 remote func _return_units_in_room(list) -> void:
-#	for item in list:
-#		if !Global.units_in_room.has(item):
-#			Global._append_unit(item)
-	Global.units_in_room = list
+	if get_tree().get_rpc_sender_id() == 1:
+#		for item in list:
+#			if !Global.units_in_room.has(item):
+#				Global._append_unit(item)
+		Global.units_in_room = list
