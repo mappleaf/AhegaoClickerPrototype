@@ -64,11 +64,10 @@ remote func ReturnLoginRequest(result, token) -> void:
 		network.disconnect("connection_succeeded", self, "_on_connection_succeeded")
 
 func RequestRegister() -> void:
-	if get_tree().get_rpc_sender_id() == 1:
-		print("Connecting to gateway to request register...")
-		rpc_id(1, "RegisterRequest", username, password.sha256_text())
-		username = ""
-		password = ""
+	print("Connecting to gateway to request register...")
+	rpc_id(1, "RegisterRequest", username, password.sha256_text())
+	username = ""
+	password = ""
 
 remote func ReturnRegisterRequest(result, message) -> void:
 	if get_tree().get_rpc_sender_id() == 1:
