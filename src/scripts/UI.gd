@@ -8,6 +8,8 @@ onready var listButton = $Container/VBoxContainer/ListButton
 
 onready var container = $Container
 
+onready var money = $Container/HBoxContainer/VBoxContainer/Money
+
 
 func _process(_delta) -> void:
 	match Global.current_scene:
@@ -43,6 +45,7 @@ func _process(_delta) -> void:
 			roomButton.disabled = false
 			shopButton.disabled = false
 			listButton.disabled = true
+	money.text = "Money: " + str(Global.money)
 
 
 func remove_units_in_room() -> void:

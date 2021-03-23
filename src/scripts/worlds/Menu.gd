@@ -4,6 +4,7 @@ extends Node2D
 func _ready() -> void:
 	Global.current_scene = "res://src/scenes/worlds/Menu.tscn"
 	Global.get_owned_units()
+	Global.get_money()
 
 
 func _on_SettingsButton_pressed():

@@ -50,6 +50,9 @@ func send_units_in_room() -> void:
 func request_new_random_unit() -> void:
 	rpc_id(1, "add_random_unit")
 
+func get_money() -> void:
+	rpc_id(1, "get_user_money")
+
 
 func _on_server_disconnected() -> void:
 	print("Server is shut down")
@@ -81,3 +84,7 @@ remote func _return_units_in_room(list) -> void:
 #			if !Global.units_in_room.has(item):
 #				Global._append_unit(item)
 		Global.units_in_room = list
+
+remote func _return_money_count(count) -> void:
+	if get_tree().get_rpc_sender_id() == 1:
+		Global.money = count

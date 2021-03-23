@@ -9,8 +9,10 @@ var unit_types = {}
 
 
 var current_scene
+
 var units_in_room = {}
 var owned_units = {}
+var money = 0
 
 
 func _ready() -> void:
@@ -29,6 +31,9 @@ func get_owned_units() -> void:
 
 func get_units_in_room() -> void:
 	Server.get_units_in_room()
+
+func get_money() -> void:
+	Server.get_money()
 
 
 

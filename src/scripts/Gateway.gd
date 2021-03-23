@@ -26,7 +26,7 @@ func ConnectToServer(_username, _password, _is_account_new) -> void:
 	network = NetworkedMultiplayerENet.new()
 	gateway_api = MultiplayerAPI.new()
 	
-	network.set_dtls_enabled(true)
+	network.set_dtls_enabled(false)
 	network.set_dtls_verify_enabled(false)
 	network.set_dtls_certificate(cert)
 	
@@ -38,7 +38,7 @@ func ConnectToServer(_username, _password, _is_account_new) -> void:
 	custom_multiplayer.set_root_node(self)
 	custom_multiplayer.set_network_peer(network)
 	
-	network.connect("server_disconnected", self, "_on_server_disconnected")
+	#network.connect("server_disconnected", self, "_on_server_disconnected")
 	network.connect("connection_failed", self, "_on_connection_failed")
 	network.connect("connection_succeeded", self, "_on_connection_succeeded")
 
@@ -49,7 +49,7 @@ func RequestLogin() -> void:
 	password = ""
 
 remote func ReturnLoginRequest(result, token) -> void:
-	if get_tree().get_rpc_sender_id() == 1:
+	if custom_multiplayer.get_rpc_sender_id() == 1:
 		print("Result received")
 		if result == true:
 			Server.token = token
@@ -59,7 +59,7 @@ remote func ReturnLoginRequest(result, token) -> void:
 			get_tree().get_nodes_in_group("login_button").front().disabled = false
 			get_tree().get_nodes_in_group("register_button").front().disabled = false
 			
-		network.disconnect("server_disconnected", self, "_on_server_disconnected")
+		#network.disconnect("server_disconnected", self, "_on_server_disconnected")
 		network.disconnect("connection_failed", self, "_on_connection_failed")
 		network.disconnect("connection_succeeded", self, "_on_connection_succeeded")
 
@@ -70,7 +70,7 @@ func RequestRegister() -> void:
 	password = ""
 
 remote func ReturnRegisterRequest(result, message) -> void:
-	if get_tree().get_rpc_sender_id() == 1:
+	if custom_multiplayer.get_rpc_sender_id() == 1:
 		print("Result received")
 		if result == true:
 			print("Account created, please log in")
@@ -82,17 +82,17 @@ remote func ReturnRegisterRequest(result, message) -> void:
 				print("Username already in use")
 			get_tree().get_nodes_in_group("confirm_button").front().disabled = false
 			get_tree().get_nodes_in_group("back_button").front().disabled = false
-		network.disconnect("server_disconnected", self, "_on_server_disconnected")
+#		network.disconnect("server_disconnected", self, "_on_server_disconnected")
 		network.disconnect("connection_failed", self, "_on_connection_failed")
 		network.disconnect("connection_succeeded", self, "_on_connection_succeeded")
 
 
-func _on_server_disconnected() -> void:
-	print("Login server is shut down")
-	get_tree().get_nodes_in_group("confirm_button").front().disabled = false
-	get_tree().get_nodes_in_group("back_button").front().disabled = false
-	get_tree().get_nodes_in_group("login_button").front().disabled = false
-	get_tree().get_nodes_in_group("register_button").front().disabled = false
+#func _on_server_disconnected() -> void:
+#	print("Login server is shut down")
+#	get_tree().get_nodes_in_group("confirm_button").front().disabled = false
+#	get_tree().get_nodes_in_group("back_button").front().disabled = false
+#	get_tree().get_nodes_in_group("login_button").front().disabled = false
+#	get_tree().get_nodes_in_group("register_button").front().disabled = false
 
 func _on_connection_failed() -> void:
 	print("Failed to connect to login server")
