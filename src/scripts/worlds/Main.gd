@@ -22,6 +22,7 @@ var combo = 0
 
 func _ready() -> void:
 	Global.current_scene = "res://src/scenes/worlds/Main.tscn"
+	clicker.texture_normal = load(Global.enemy.texture_location)
 
 func _process(_delta) -> void:
 	heart_forbeat.scale.x = lerp(heart_forbeat.scale.x, 0.25, 0.05)

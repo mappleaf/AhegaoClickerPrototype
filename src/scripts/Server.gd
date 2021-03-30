@@ -53,6 +53,12 @@ func request_new_random_unit() -> void:
 func get_money() -> void:
 	rpc_id(1, "get_user_money")
 
+func get_enemies() -> void:
+	rpc_id(1, "send_enemies_list")
+
+func get_enemy() -> void:
+	rpc_id(1, "send_current_enemy")
+
 
 func _on_server_disconnected() -> void:
 	print("Server is shut down")
@@ -88,3 +94,11 @@ remote func _return_units_in_room(list) -> void:
 remote func _return_money_count(count) -> void:
 	if get_tree().get_rpc_sender_id() == 1:
 		Global.money = count
+
+remote func _return_enemies_list(list) -> void:
+	if get_tree().get_rpc_sender_id() == 1:
+		Global.enemies = list
+
+remote func _return_current_enemy(enemy) -> void:
+	if get_tree().get_rpc_sender_id() == 1:
+		Global.enemy = enemy

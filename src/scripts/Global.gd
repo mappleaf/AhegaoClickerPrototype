@@ -14,6 +14,9 @@ var units_in_room = {}
 var owned_units = {}
 var money = 0
 
+var enemies = {}
+var enemy = {}
+
 
 func _ready() -> void:
 	randomize()
@@ -34,6 +37,12 @@ func get_units_in_room() -> void:
 
 func get_money() -> void:
 	Server.get_money()
+
+func get_enemies() -> void:
+	Server.get_enemies()
+
+func get_enemy() -> void:
+	Server.get_enemy()
 
 
 
