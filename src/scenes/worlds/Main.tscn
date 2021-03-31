@@ -23,20 +23,27 @@ __meta__ = {
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
 margin_left = 1030.0
-margin_top = 405.0
+margin_top = 371.0
 margin_right = 1530.0
-margin_bottom = 1035.0
+margin_bottom = 1069.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
 margin_right = 500.0
-margin_bottom = 630.0
+margin_bottom = 698.0
+
+[node name="EnemyHealth" type="ProgressBar" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+margin_right = 500.0
+margin_bottom = 64.0
+value = 100.0
+rounded = true
 
 [node name="Clicker" type="TextureButton" parent="CenterContainer/HBoxContainer/VBoxContainer"]
+margin_top = 68.0
 margin_right = 500.0
-margin_bottom = 562.0
+margin_bottom = 630.0
 texture_normal = ExtResource( 2 )
 
 [node name="Timer" type="Timer" parent="CenterContainer/HBoxContainer/VBoxContainer/Clicker"]
@@ -44,9 +51,9 @@ wait_time = 0.35
 autostart = true
 
 [node name="ComboLabel" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer"]
-margin_top = 566.0
+margin_top = 634.0
 margin_right = 500.0
-margin_bottom = 630.0
+margin_bottom = 698.0
 text = "Combo: 0"
 align = 1
 

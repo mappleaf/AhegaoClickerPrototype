@@ -16,6 +16,10 @@ var money = 0
 
 var enemies = {}
 var enemy = {}
+var is_enemy_new = false
+
+#!!!TESTING!!!
+var damage = 10
 
 
 func _ready() -> void:
@@ -43,6 +47,9 @@ func get_enemies() -> void:
 
 func get_enemy() -> void:
 	Server.get_enemy()
+
+func killed_enemy() -> void:
+	Server.killed_enemy()
 
 
 

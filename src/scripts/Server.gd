@@ -59,6 +59,9 @@ func get_enemies() -> void:
 func get_enemy() -> void:
 	rpc_id(1, "send_current_enemy")
 
+func killed_enemy() -> void:
+	rpc_id(1, "killed_enemy")
+
 
 func _on_server_disconnected() -> void:
 	print("Server is shut down")
@@ -99,6 +102,7 @@ remote func _return_enemies_list(list) -> void:
 	if get_tree().get_rpc_sender_id() == 1:
 		Global.enemies = list
 
-remote func _return_current_enemy(enemy) -> void:
+remote func _return_current_enemy(enemy, is_new) -> void:
 	if get_tree().get_rpc_sender_id() == 1:
 		Global.enemy = enemy
+		Global.is_enemy_new = is_new

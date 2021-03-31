@@ -10,6 +10,7 @@ onready var container = $CenterContainer
 onready var clickerTimer = $CenterContainer/HBoxContainer/VBoxContainer/Clicker/Timer
 
 onready var comboLabel = $CenterContainer/HBoxContainer/VBoxContainer/ComboLabel
+onready var healthBar = $CenterContainer/HBoxContainer/VBoxContainer/EnemyHealth
 
 onready var heart_forbeat = $Heart
 onready var heartbeat = $Heartbeat
@@ -23,6 +24,9 @@ var combo = 0
 func _ready() -> void:
 	Global.current_scene = "res://src/scenes/worlds/Main.tscn"
 	clicker.texture_normal = load(Global.enemy.texture_location)
+	healthBar.max_value = Global.enemy.max_health
+	healthBar.value = Global.enemy.health
+	update_enemy()
 
 func _process(_delta) -> void:
 	heart_forbeat.scale.x = lerp(heart_forbeat.scale.x, 0.25, 0.05)
@@ -31,6 +35,22 @@ func _process(_delta) -> void:
 func _physics_process(_delta) -> void:
 	combo = clamp(combo, 0, 100)
 	comboLabel.text = "Combo: " + str(combo)
+	
+	clicker.texture_normal = load(Global.enemy.texture_location)
+	healthBar.max_value = Global.enemy.max_health
+	healthBar.value = Global.enemy.health
+	
+	if Global.enemy.health <= 0 and Global.is_enemy_new == true:
+		update_enemy()
+	
+	if Global.enemy.health <= 0:
+		Global.killed_enemy()
+
+
+func update_enemy() -> void:
+	print("Update enemy")
+	healthBar.value = Global.enemy.max_health
+	Global.is_enemy_new = false
 
 
 func _on_TextureButton_button_down():
@@ -41,6 +61,10 @@ func _on_TextureButton_button_up():
 
 func _on_Clicker_pressed():
 	combo += 1
+	
+	if Global.enemy.health >= 0:
+		Global.enemy.health = max(Global.enemy.health - Global.damage, 0)
+	
 	var heartinstance = heart.instance()
 	clicker.add_child(heartinstance)
 	heartinstance.position = clicker.rect_position + (clicker.rect_size * clicker.rect_scale - Vector2(rand_range((clicker.rect_size.x * clicker.rect_scale.x) / -1.5, (clicker.rect_size.x * clicker.rect_scale.x) / 1.5), rand_range((clicker.rect_size.y * clicker.rect_scale.y) / 1.25, (clicker.rect_size.y * clicker.rect_scale.y) / 3.5))) * container.rect_scale
