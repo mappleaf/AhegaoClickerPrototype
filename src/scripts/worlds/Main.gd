@@ -8,11 +8,12 @@ const MAX_FREQ = 20000
 onready var clicker = $CenterContainer/HBoxContainer/VBoxContainer/Clicker
 onready var container = $CenterContainer
 onready var clickerTimer = $CenterContainer/HBoxContainer/VBoxContainer/Clicker/Timer
+onready var girl = $Girl
 
 onready var comboLabel = $CenterContainer/HBoxContainer/VBoxContainer/ComboLabel
 onready var healthBar = $CenterContainer/HBoxContainer/VBoxContainer/EnemyHealth
 
-onready var heart_forbeat = $Heart
+onready var heart_forbeat = $Girl/Heart
 onready var heartbeat = $Heartbeat
 onready var heartbeatTimer = $HeartbeatTimer
 
@@ -66,8 +67,8 @@ func _on_Clicker_pressed():
 		Global.enemy.health = max(Global.enemy.health - Global.damage, 0)
 	
 	var heartinstance = heart.instance()
-	clicker.add_child(heartinstance)
-	heartinstance.position = clicker.rect_position + (clicker.rect_size * clicker.rect_scale - Vector2(rand_range((clicker.rect_size.x * clicker.rect_scale.x) / -1.5, (clicker.rect_size.x * clicker.rect_scale.x) / 1.5), rand_range((clicker.rect_size.y * clicker.rect_scale.y) / 1.25, (clicker.rect_size.y * clicker.rect_scale.y) / 3.5))) * container.rect_scale
+	girl.add_child(heartinstance)
+	heartinstance.position = girl.global_position + (girl.scale - Vector2(rand_range((girl.position.x * girl.scale.x) / -1.5, (girl.position.x * girl.scale.x) / 1.5), rand_range((girl.position.y * girl.scale.y) / 1.25, (girl.position.y * girl.scale.y) / 3.5))) * container.rect_scale
 
 func _on_ClickerTimer_timeout():
 	combo -= 1
