@@ -18,6 +18,11 @@ var enemies = {}
 var enemy = {}
 var is_enemy_new = false
 
+var gacha_starting
+var gacha_regular
+var gacha_special
+var stardust
+
 #!!!TESTING!!!
 var damage = 10
 
@@ -31,6 +36,9 @@ func _ready() -> void:
 	
 	append_units()
 	#units_in_room[test_unit] = test_unit.unit_data
+
+func _physics_process(_delta):
+	print(owned_units)
 
 
 func get_owned_units() -> void:
@@ -50,6 +58,15 @@ func get_enemy() -> void:
 
 func killed_enemy() -> void:
 	Server.killed_enemy()
+
+func get_gacha() -> void:
+	Server.get_gacha()
+
+func open_gacha(gacha_type) -> void:
+	Server.open_gacha(gacha_type)
+
+func get_stardust() -> void:
+	Server.get_stardust()
 
 
 

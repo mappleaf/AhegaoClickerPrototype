@@ -62,6 +62,15 @@ func get_enemy() -> void:
 func killed_enemy() -> void:
 	rpc_id(1, "killed_enemy")
 
+func get_gacha() -> void:
+	rpc_id(1, "get_user_gacha")
+
+func open_gacha(gacha_type) -> void:
+	rpc_id(1, "open_gacha", gacha_type)
+
+func get_stardust() -> void:
+	rpc_id(1, "get_user_stardust")
+
 
 func _on_server_disconnected() -> void:
 	print("Server is shut down")
@@ -106,3 +115,18 @@ remote func _return_current_enemy(enemy, is_new) -> void:
 	if get_tree().get_rpc_sender_id() == 1:
 		Global.enemy = enemy
 		Global.is_enemy_new = is_new
+
+remote func _return_gacha(gacha_count) -> void:
+	if get_tree().get_rpc_sender_id() == 1:
+		if Global.gacha_starting and Global.gacha_regular and Global.gacha_special:
+			if Global.gacha_starting > gacha_count[0] or Global.gacha_regular > gacha_count[1] or Global.gacha_special > gacha_count[2]:
+# warning-ignore:return_value_discarded
+				get_tree().change_scene("res://src/scenes/worlds/NoConnection.tscn")
+				return
+		Global.gacha_starting = gacha_count[0]
+		Global.gacha_regular = gacha_count[1]
+		Global.gacha_special = gacha_count[2]
+
+remote func _return_stardust(count) -> void:
+	if get_tree().get_rpc_sender_id() == 1:
+		Global.stardust = count

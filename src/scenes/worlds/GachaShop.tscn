@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/resources/font1.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/buttons/button-locked.png" type="Texture" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://src/scripts/worlds/GachaShop.gd" type="Script" id=6]
 
 [sub_resource type="Theme" id=1]
+default_font = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
 default_font = ExtResource( 1 )
 
 [node name="GachaShop" type="Node2D"]
@@ -38,16 +41,16 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
-margin_left = 582.0
+margin_left = 353.0
 margin_top = 33.0
-margin_right = 1466.0
+margin_right = 1695.0
 margin_bottom = 223.0
 custom_constants/separation = 32
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="CenterContainer/HBoxContainer"]
+[node name="Gacha_Starting" type="TextureButton" parent="CenterContainer/HBoxContainer"]
 margin_right = 426.0
 margin_bottom = 190.0
 texture_normal = ExtResource( 5 )
@@ -55,17 +58,17 @@ texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 3 )
 texture_disabled = ExtResource( 2 )
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/TextureButton"]
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/Gacha_Starting"]
 margin_right = 421.0
 margin_bottom = 175.0
-text = "Gacha 1"
+text = "Starting"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton2" type="TextureButton" parent="CenterContainer/HBoxContainer"]
+[node name="Gacha_Regular" type="TextureButton" parent="CenterContainer/HBoxContainer"]
 margin_left = 458.0
 margin_right = 884.0
 margin_bottom = 190.0
@@ -74,14 +77,75 @@ texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 3 )
 texture_disabled = ExtResource( 2 )
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/TextureButton2"]
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/Gacha_Regular"]
 margin_right = 430.0
 margin_bottom = 175.0
-text = "Gacha 2"
+text = "Regular"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="CenterContainer/HBoxContainer/TextureButton" to="." method="_on_TextureButton_pressed"]
-[connection signal="pressed" from="CenterContainer/HBoxContainer/TextureButton2" to="." method="_on_TextureButton2_pressed"]
+
+[node name="Gacha_Special" type="TextureButton" parent="CenterContainer/HBoxContainer"]
+margin_left = 916.0
+margin_right = 1342.0
+margin_bottom = 190.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 3 )
+texture_disabled = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/Gacha_Special"]
+margin_right = 427.0
+margin_bottom = 175.0
+text = "Special"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OpenGacha" type="TextureButton" parent="Control"]
+margin_left = 1072.0
+margin_top = 1072.0
+margin_right = 1498.0
+margin_bottom = 1262.0
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 3 )
+texture_disabled = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/OpenGacha"]
+margin_right = 416.0
+margin_bottom = 176.0
+text = "Open!"
+align = 1
+valign = 1
+
+[node name="GachaCount" type="Label" parent="Control/OpenGacha"]
+margin_left = 464.0
+margin_top = 48.0
+margin_right = 504.0
+margin_bottom = 112.0
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Gacha_Starting" to="." method="_on_Gacha_Starting_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Gacha_Regular" to="." method="_on_Gacha_Regular_pressed"]
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Gacha_Special" to="." method="_on_Gacha_Special_pressed"]
+[connection signal="pressed" from="Control/OpenGacha" to="." method="_on_OpenGacha_pressed"]

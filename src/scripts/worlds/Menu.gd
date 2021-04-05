@@ -7,6 +7,8 @@ func _ready() -> void:
 	Global.get_money()
 	Global.get_enemies()
 	Global.get_enemy()
+	Global.get_gacha()
+	Global.get_stardust()
 
 
 func _on_SettingsButton_pressed():
