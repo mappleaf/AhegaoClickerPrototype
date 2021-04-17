@@ -23,6 +23,8 @@ var gacha_regular
 var gacha_special
 var stardust
 
+var weapons = []
+
 #!!!TESTING!!!
 var damage = 10
 
@@ -37,9 +39,12 @@ func _ready() -> void:
 	append_units()
 	#units_in_room[test_unit] = test_unit.unit_data
 
-func _physics_process(_delta):
-	print(owned_units)
+#func _physics_process(_delta):
+#	print(owned_units)
 
+
+func get_weapons() -> void:
+	Server.get_weapons()
 
 func get_owned_units() -> void:
 	Server.request_owned_units()

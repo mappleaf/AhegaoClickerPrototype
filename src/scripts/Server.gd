@@ -109,6 +109,9 @@ func open_gacha(gacha_type) -> void:
 func get_stardust() -> void:
 	rpc_id(1, "get_user_stardust")
 
+func get_weapons() -> void:
+	rpc_id(1, "get_user_weapons")
+
 
 func _on_server_disconnected() -> void:
 	print("Server is shut down")
@@ -141,6 +144,7 @@ remote func _return_units_list(list) -> void:
 remote func _return_owned_units(units) -> void:
 	if get_tree().get_rpc_sender_id() == 1:
 		Global.owned_units = units
+		print(Global.owned_units)
 
 remote func _return_units_in_room(list) -> void:
 	if get_tree().get_rpc_sender_id() == 1:
@@ -176,3 +180,8 @@ remote func _return_gacha(gacha_count) -> void:
 remote func _return_stardust(count) -> void:
 	if get_tree().get_rpc_sender_id() == 1:
 		Global.stardust = count
+
+remote func _return_weapons(weapons) -> void:
+	if get_tree().get_rpc_sender_id() == 1:
+		Global.weapons = weapons
+		print(Global.weapons)
