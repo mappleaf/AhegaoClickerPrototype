@@ -6,6 +6,20 @@ var port = 1909
 
 var token
 
+var decimal_collector: float = 0
+var latency = 0
+var client_clock = 0
+var delta_latency = 0
+var latency_array = []
+
+
+func _physics_process(delta): #0.01667
+	client_clock += int(delta * 1000) + delta_latency
+	delta_latency = 0
+	decimal_collector += (delta * 1000) - int(delta * 1000)
+	if decimal_collector >= 1.00:
+		client_clock += 1
+		decimal_collector -= 1.00
 
 func _ready() -> void:
 	#ConnectToServer()
@@ -34,6 +48,30 @@ remote func ReturnTokenVerificationResults(result) -> void:
 			print("Login failed, please try again")
 			get_tree().get_nodes_in_group("login_button").front().disabled = false
 			get_tree().get_nodes_in_group("register_button").front().disabled = false
+
+remote func ReturnServerTime(server_time, client_time) -> void:
+	if get_tree().get_rpc_sender_id() == 1:
+		latency = (OS.get_system_time_msecs() - client_time) / 2
+		client_clock = server_time + latency
+
+func DetermineLatency() -> void:
+	rpc_id(1, "DetermineLatency", OS.get_system_time_msecs())
+
+remote func ReturnLatency(client_time):
+	latency_array.append((OS.get_system_time_msecs() - client_time) / 2)
+	if latency_array.size() >= 9:
+		var total_latency = 0
+		latency_array.sort()
+		var mid_point = latency_array[4]
+		for i in range(latency_array.size() - 1, -1, -1):
+			if latency_array[i] > (2 * mid_point) and latency_array[i] > 20:
+				latency_array.remove(i)
+			else:
+				total_latency += latency_array[i]
+		delta_latency = (total_latency / latency_array.size()) - latency
+		latency = total_latency / latency_array.size()
+		latency_array.clear()
+
 
 func get_unit_types() -> void:
 	rpc_id(1, "send_units_list")
@@ -84,6 +122,14 @@ func _on_connection_failed() -> void:
 
 func _on_connection_succeeded() -> void:
 	print("Succesfully connected")
+	
+	rpc_id(1, "FetchServerTime", OS.get_system_time_msecs())
+	var timer = Timer.new()
+	timer.wait_time = 0.5
+	timer.autostart = true
+	timer.connect("timeout", self, "DetermineLatency")
+	self.add_child(timer)
+	
 	get_unit_types()
 # warning-ignore:return_value_discarded
 	get_tree().change_scene("res://src/scenes/worlds/Menu.tscn")
