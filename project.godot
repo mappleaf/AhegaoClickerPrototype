@@ -57,6 +57,14 @@ texture={
 "svg/scale": 1.0
 }
 
+[locale]
+
+translations=PoolStringArray(  )
+locale_filter=[ 0, [  ] ]
+translation_remaps={
+
+}
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
